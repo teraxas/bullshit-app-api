@@ -7,14 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+import lt.mesgalis.bullshit.servlet3.WebInit;
+
 @SpringBootApplication
-@ComponentScan({"lt.mesgalis.bullshit.config", "lt.mesgalis.bullshit.service", "lt.mesgalis.bullshit.web" })
+@ComponentScan({"lt.mesgalis.bullshit.config", "lt.mesgalis.bullshit.servlet3" })
 public class Application {
 	
 	private static ApplicationContext ctx;
 
 	public static void main(String[] args) throws Exception {
-		ctx = SpringApplication.run(Application.class, args);
+		ctx = SpringApplication.run(new Class[] {Application.class, WebInit.class}, args);
 
         logBeans();
 	}
