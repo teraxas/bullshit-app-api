@@ -25,25 +25,29 @@
 			<p>The content is {{home.greeting.content}}</p>
 		</div>
 	</div>
-	<div class="container" ng-show="bullshitBegan" >
+
+	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<h3>Column 1</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					laboris...</p>
+			<div class="col-xs-4">
+				<form>
+					<div class="form-group">
+						<label>Type a Number</label> <input type="text"
+							class="form-control" ng-model="myNumber">
+					</div>
+				</form>
 			</div>
-			<div class="col-sm-4">
-				<h3>Column 2</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					laboris...</p>
-			</div>
-			<div class="col-sm-4">
-				<h3>Column 3</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					laboris...</p>
+
+			<div class="col-xs-8 jumbotron text-center">
+
+				<!-- show if our function evaluates to false -->
+				<div ng-show="isEven(myNumber)">
+					<h2>The number is even.</h2>
+				</div>
+
+				<!-- show if our function evaluates to false -->
+				<div ng-show="!isEven(myNumber)">
+					<h2>The number is odd.</h2>
+				</div>
 			</div>
 		</div>
 	</div>
