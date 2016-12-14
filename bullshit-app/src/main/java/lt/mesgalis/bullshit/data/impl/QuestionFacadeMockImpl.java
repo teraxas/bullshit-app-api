@@ -1,19 +1,17 @@
 package lt.mesgalis.bullshit.data.impl;
 
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.Lists;
-
+import javaslang.collection.List;
 import lt.mesgalis.bullshit.data.QuestionDTO;
 import lt.mesgalis.bullshit.model.Question;
 
 @Component
-public class QuestionDTOMockImpl implements QuestionDTO {
+public class QuestionFacadeMockImpl implements QuestionDTO {
 	
-	private static final List<Question> questions = Lists.newArrayList(
+	private List<Question> questions = List.of(
 			new Question(0, "First man on the moon had strong arms", true),
 			new Question(1, "42 is the answer to meaning of life and universe and everything", true),
 			new Question(2, "No bullshit here", true),

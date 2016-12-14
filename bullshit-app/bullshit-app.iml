@@ -62,5 +62,6 @@
     <orderEntry type="library" name="Maven: io.javaslang:javaslang-match:2.0.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.webjars:angularjs:1.4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.webjars:jasmine:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:14.0.1" level="project" />
   </component>
 </module>

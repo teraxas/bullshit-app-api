@@ -1,21 +1,24 @@
 
-angular.module('hello', []).controller('home', function($http) {
+angular.module('bullshit', []).controller('question', function($http, $scope) {
 	var self = this;
-	
-	// set the default value of our number
-	$http.myNumber = 0;
-	
-	// function to evaluate if a number is even
-	$http.isEven = function(value) {
+	self.question = null;
+	self.lastResponse = null;
 
-		if (value % 2 == 0)
-			return true;
-		else
-			return false;
-
+	$scope.loadQuestion = function() {
+		$http.get('question/get/').then(function(response) {
+			$scope.question = response.data;
+		});
 	};
-	
-	$http.get('question/resource/').then(function(response) {
-		self.greeting = response.data;
-	})
+
+	$scope.answer = function(isBullshit) {
+		$http.post('question/answer/', {
+			id: $scope.question.id,
+			answer: isBullshit
+		}).then(function(response) {
+			$scope.lastResponse = response.data;
+		});
+	};
+
+	$scope.loadQuestion();
+
 });
