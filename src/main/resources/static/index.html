@@ -21,17 +21,8 @@
 	</div>
 	
 	<div ng-app="bullshit" ng-controller="question as conQuestion" >
-		<div class="jumbotron text-center">
+		<div class="jumbotron text-center" ng-show="lastResponseResult == null">
 			<h1>{{question.question}}</h1>
-		</div>
-	
-		<div class="text-center" ng-show="lastResponseResult == null">
-			<button type="button" class="btn btn-success" ng-click='answer(false)' >Yep</button>
-			<button type="button" class="btn btn-danger" ng-click='answer(true)' >Bullshit!!!</button>
-		</div>
-
-		<div class="text-center" ng-show="lastResponseResult != null">
-			<button type="button" class="btn btn-primary" ng-click='loadQuestion()' >More Bullshit</button>
 		</div>
 
 		<div class="jumbotron text-center" ng-show="lastResponseResult != null">
@@ -42,6 +33,15 @@
 			<div ng-show="!lastResponseResult">
 				<h2>Nope</h2>
 			</div>
+		</div>
+
+		<div class="text-center" ng-show="lastResponseResult == null">
+			<button type="button" class="btn btn-success" ng-click='answer(false)' >Yep</button>
+			<button type="button" class="btn btn-danger" ng-click='answer(true)' >Bullshit!!!</button>
+		</div>
+
+		<div class="text-center" ng-show="lastResponseResult != null">
+			<button type="button" class="btn btn-primary" ng-click='loadQuestion()' >More Bullshit</button>
 		</div>
 
 	</div>

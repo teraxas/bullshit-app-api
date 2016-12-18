@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lt.mesgalis.bullshit.model.Question;
-import lt.mesgalis.bullshit.data.QuestionFacade;
+import lt.mesgalis.bullshit.helper.QuestionHelper;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class QuestionsController {
 
 	@Autowired
-	private QuestionFacade questions;
+	private QuestionHelper questions;
 
 	@RequestMapping("/get")
 	public Question getQuestion() {
-		return questions.getQuestion();
+		return questions.getRandomQuestion();
 	}
 
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)

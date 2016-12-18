@@ -2,20 +2,33 @@ package lt.mesgalis.bullshit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Question {
-	public final long id;
-	public final String question;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	@JsonIgnore
-	private boolean bullshit;
-	
-	public Question(long id, String question, boolean bullshit) {
+@Entity
+@Table(name = "QUESTION")
+public class Question {
+
+	@Id @GeneratedValue private Long id;
+	private String question;
+
+	@JsonIgnore private boolean bullshit;
+
+	public Question(Long id, String question, boolean bullshit) {
 		this.id = id;
 		this.question = question;
 		this.bullshit = bullshit;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
 	public boolean isBullshit() {
 		return bullshit;
+	}
+	public String getQuestion() {
+		return question;
 	}
 }
