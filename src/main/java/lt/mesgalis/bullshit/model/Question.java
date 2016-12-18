@@ -2,18 +2,16 @@ package lt.mesgalis.bullshit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "QUESTION")
 public class Question {
 
-	@Id @GeneratedValue private Long id;
-	private String question;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
+	private String question;
 	@JsonIgnore private boolean bullshit;
 
 	public Question(Long id, String question, boolean bullshit) {
