@@ -1,12 +1,12 @@
 
 angular.module('bullshit', []).controller('question', function($http, $scope) {
 	var self = this;
-	self.question = null;
-	self.lastResponse = null;
 
 	$scope.loadQuestion = function() {
 		$http.get('question/get/').then(function(response) {
 			$scope.question = response.data;
+			$scope.lastResponseResult = null;
+			$rootScope.$$phase || $rootScope.$apply();
 		});
 	};
 
@@ -15,7 +15,7 @@ angular.module('bullshit', []).controller('question', function($http, $scope) {
 			id: $scope.question.id,
 			answer: isBullshit
 		}).then(function(response) {
-			$scope.lastResponse = response.data;
+			$scope.lastResponseResult = response.data;
 		});
 	};
 

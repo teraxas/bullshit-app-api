@@ -20,32 +20,30 @@
 		<p>Is this the real life or is it just bullshit?</p>
 	</div>
 	
-	<div ng-app="bullshit" ng-controller="question" >
-		<div class="container">
-			<h1>Greeting</h1>
+	<div ng-app="bullshit" ng-controller="question as conQuestion" >
+		<div class="jumbotron text-center">
+			<h1>{{question.question}}</h1>
 		</div>
 	
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-4">
-					<button ng-click='answer(false)' >Yep</button>
-					<button ng-click='answer(true)' >Bullshit!!!</button>
-				</div>
-	
-				<div class="col-xs-8 jumbotron text-center">
-					<h2>{{question.question.question}}</h2>
-					<!-- show if our function evaluates to false -->
-					<!--<div ng-show="home.isEven(myNumber)">-->
-						<!--<h2>The number is even.</h2>-->
-					<!--</div>-->
+		<div class="text-center" ng-show="lastResponseResult == null">
+			<button type="button" class="btn btn-success" ng-click='answer(false)' >Yep</button>
+			<button type="button" class="btn btn-danger" ng-click='answer(true)' >Bullshit!!!</button>
+		</div>
 
-					<!-- show if our function evaluates to false -->
-					<!--<div ng-show="!home.isEven(myNumber)">-->
-						<!--<h2>The number is odd.</h2>-->
-					<!--</div>-->
-				</div>
+		<div class="text-center" ng-show="lastResponseResult != null">
+			<button type="button" class="btn btn-primary" ng-click='loadQuestion()' >More Bullshit</button>
+		</div>
+
+		<div class="jumbotron text-center" ng-show="lastResponseResult != null">
+			<div ng-show="lastResponseResult">
+				<h2>Yep</h2>
+			</div>
+
+			<div ng-show="!lastResponseResult">
+				<h2>Nope</h2>
 			</div>
 		</div>
+
 	</div>
 
 

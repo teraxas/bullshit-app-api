@@ -5,11 +5,11 @@ import java.util.Random;
 import org.springframework.stereotype.Component;
 
 import javaslang.collection.List;
-import lt.mesgalis.bullshit.data.QuestionDTO;
 import lt.mesgalis.bullshit.model.Question;
+import lt.mesgalis.bullshit.data.QuestionFacade;
 
 @Component
-public class QuestionFacadeMockImpl implements QuestionDTO {
+public class QuestionFacadeMockImpl implements QuestionFacade {
 	
 	private List<Question> questions = List.of(
 			new Question(0, "First man on the moon had strong arms", true),
