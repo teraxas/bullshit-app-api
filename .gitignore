@@ -1,3 +1,13 @@
 /.idea/
-bullshit-app/nbactions.xml
-bullshit-app/bullshit-app.iml
+/target/
+/.settings/
+bower_components
+node_modules
+nbactions.xml
+bullshit-app.iml
+.project
+.classpath
+node
+*.log
+asciidoctor.css
+README.html
