@@ -7,6 +7,8 @@ angular.module('bullshit', []).controller('question', function($http, $scope) {
 			$scope.question = response.data;
 			$scope.lastResponseResult = null;
 			$rootScope.$$phase || $rootScope.$apply();
+
+			console.log("Question received: " + $scope.question);
 		});
 	};
 
@@ -16,6 +18,8 @@ angular.module('bullshit', []).controller('question', function($http, $scope) {
 			answer: isBullshit
 		}).then(function(response) {
 			$scope.lastResponseResult = response.data;
+
+			console.log("Answer received: ", $scope.lastResponseResult);
 		});
 	};
 

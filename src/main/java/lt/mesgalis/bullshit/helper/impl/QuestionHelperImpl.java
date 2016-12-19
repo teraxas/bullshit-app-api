@@ -17,7 +17,7 @@ import java.util.stream.LongStream;
 @Component
 public class QuestionHelperImpl implements QuestionHelper {
 
-	private static final Logger log = LogManager.getLogger(QuestionHelperImpl.class);
+	private static final Logger log = LogManager.getLogger(QuestionHelperImpl.class.getName());
 
 	@Autowired private HttpSession session;
 	@Autowired private QuestionCrud questions;

@@ -1,6 +1,7 @@
 package lt.mesgalis.bullshit;
 
-import static javaslang.API.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -17,6 +18,8 @@ import java.util.Arrays;
 @EnableJpaRepositories("lt.mesgalis.bullshit.data")
 public class Application {
 
+    private static final Logger log = LogManager.getLogger(Application.class);
+
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
         printLoadedBeans(ctx);
@@ -28,11 +31,11 @@ public class Application {
     }
 
     public static void printLoadedBeans(ConfigurableApplicationContext ctx) {
-        System.out.println("Beans loaded:");
+        log.debug("Beans loaded:");
         String[] beanNames = ctx.getBeanDefinitionNames();
         Arrays.sort(beanNames);
         for (String beanName : beanNames) {
-            System.out.println("   " + beanName);
+            log.debug("   " + beanName);
         }
     }
 
