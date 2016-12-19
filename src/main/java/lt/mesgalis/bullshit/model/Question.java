@@ -31,4 +31,13 @@ public class Question {
 	public String getQuestion() {
 		return question;
 	}
+
+	@Override
+	public String toString() {
+		return "Question{" +
+				"id=" + id +
+				", question='" + question + '\'' +
+				", bullshit=" + bullshit +
+				'}';
+	}
 }

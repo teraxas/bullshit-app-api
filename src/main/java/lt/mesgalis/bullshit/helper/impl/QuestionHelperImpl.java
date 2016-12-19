@@ -1,8 +1,11 @@
 package lt.mesgalis.bullshit.helper.impl;
 
-import javaslang.collection.List;
+import javaslang.collection.Set;
+import javaslang.collection.TreeSet;
+import javaslang.control.Option;
 import lt.mesgalis.bullshit.data.QuestionCrud;
 import lt.mesgalis.bullshit.helper.QuestionHelper;
+import lt.mesgalis.bullshit.helper.SessionHelper;
 import lt.mesgalis.bullshit.model.Question;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,21 +14,20 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.LongStream;
 
 @Component
 public class QuestionHelperImpl implements QuestionHelper {
 
 	private static final Logger log = LogManager.getLogger(QuestionHelperImpl.class.getName());
 
-	@Autowired private HttpSession session;
 	@Autowired private QuestionCrud questions;
+	@Autowired private SessionHelper session;
 
 	@Override
 	public Question getRandomQuestion() {
-		long id = getRandomQuestionID(null);
+		long id = getRandomQuestionID(session.getUsedQuestions());
 		Question question = questions.findOne(id);
+		session.addToUsedIDS((int) id);
 		log.debug("Next question: " + question);
 		return question;
 	}
@@ -48,7 +50,8 @@ public class QuestionHelperImpl implements QuestionHelper {
 
 		int nextID;
 		do {
-			nextID = random.nextInt((int) count);
+			nextID = random.nextInt((int) count--);
+			nextID++;
 		} while (usedIds != null && usedIds.contains(nextID));
 
 		log.debug("Next question ID: " + nextID);

@@ -9,6 +9,7 @@ import lt.mesgalis.bullshit.model.Question;
 import lt.mesgalis.bullshit.helper.QuestionHelper;
 
 //@Component
+@Deprecated
 public class QuestionHelperMockImpl implements QuestionHelper {
 	
 	private List<Question> questions = List.of(
