@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-@Profile("dev")
-public class InMemoryDataLoader {
+//@Profile("dev")
+public class TestDataLoader {
 
 	@Autowired private QuestionCrud questions;
 
