@@ -14,6 +14,8 @@ public class Question {
 	private String question;
 	@JsonIgnore private boolean bullshit;
 
+	public Question() {}
+
 	public Question(Long id, String question, boolean bullshit) {
 		this.id = id;
 		this.question = question;
