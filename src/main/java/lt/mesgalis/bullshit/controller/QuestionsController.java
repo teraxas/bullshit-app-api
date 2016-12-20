@@ -22,13 +22,11 @@ public class QuestionsController {
 
 	@RequestMapping("/get")
 	public Question getQuestion() {
-		log.debug("Request /question/get");
 		return questions.getRandomQuestion();
 	}
 
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
 	public ResultsResponse answerQuestion(@RequestBody Answer request) {
-		log.debug("Request /question/answer");
 		boolean result = questions.checkAnswer(request.id, request.answer);
 		return buildResultsResponse(result);
 	}
