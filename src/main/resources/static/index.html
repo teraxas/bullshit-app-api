@@ -6,11 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-<!--<style type="text/css">-->
-<!--[ng\:cloak], [ng-cloak], .ng-cloak {-->
-	<!--display: none !important;-->
-<!--}-->
-<!--</style>-->
+<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="bower_components/angular/angular.js" type="text/javascript"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+<script src="js/questions.js"></script>
 </head>
 
 <body>
@@ -22,19 +21,18 @@
 
 	<div ng-app="bullshit" ng-controller="question as conQuestion" >
 		<div class="loader center" ng-show="loading"></div>
-		<div ng-hide="loading" >
+
+		<div class="jumbotron text-center" ng-hide="loading || question" >
+			<h1>We ran out of Bullshit!</h1>
+		</div>
+
+		<div ng-hide="loading || !question" >
 			<div class="jumbotron text-center" ng-show="lastResponseResult == null">
 				<h1>{{question.question}}</h1>
 			</div>
 
 			<div class="jumbotron text-center" ng-show="lastResponseResult != null">
-				<div ng-show="lastResponseResult">
-					<h2>Yep</h2>
-				</div>
-
-				<div ng-show="!lastResponseResult">
-					<h2>Nope</h2>
-				</div>
+				<h2>{{lastResponseResult.lastResult}}</h2>
 			</div>
 
 			<div class="text-center" ng-show="lastResponseResult == null">
@@ -50,9 +48,6 @@
 	</div>
 
 
-	<script src="bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
-	<script src="bower_components/angular/angular.js" type="text/javascript"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
-	<script src="js/hello.js"></script>
+
 </body>
 </html>

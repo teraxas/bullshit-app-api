@@ -25,9 +25,13 @@ public class QuestionHelperImpl implements QuestionHelper {
 
 	@Override
 	public Question getRandomQuestion() {
-		long id = getRandomQuestionID(session.getUsedQuestions());
+		Long id = getRandomQuestionID(session.getUsedQuestions());
+		if (id == null) {
+			return null;
+		}
+
 		Question question = questions.findOne(id);
-		session.addToUsedIDS((int) id);
+		session.addToUsedIDS(id.intValue());
 		log.debug("Next question: " + question);
 		return question;
 	}
@@ -43,8 +47,12 @@ public class QuestionHelperImpl implements QuestionHelper {
 		return question.isBullshit() == answer;
 	}
 
-	private long getRandomQuestionID(Set<Integer> usedIds) {
+	private Long getRandomQuestionID(Set<Integer> usedIds) {
 		long count = questions.count();
+
+		if (usedIds != null && count == usedIds.size()) {
+			return null;
+		}
 
 		Random random = new Random();
 
@@ -55,7 +63,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 		} while (usedIds != null && usedIds.contains(nextID));
 
 		log.debug("Next question ID: " + nextID);
-		return nextID;
+		return Long.valueOf(nextID);
 	}
 
 }

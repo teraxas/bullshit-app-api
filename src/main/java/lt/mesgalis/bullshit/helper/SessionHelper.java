@@ -22,11 +22,11 @@ public class SessionHelper {
 	}
 
 	public int getTotalTries() {
-		return (int) session.getAttribute(SESSION_ATTR_TOTAL_TRIES);
+		return (int) Option.of(session.getAttribute(SESSION_ATTR_TOTAL_TRIES)).getOrElse(0);
 	}
 
 	public int getSuccessTries() {
-		return (int) session.getAttribute(SESSION_ATTR_SUCCESS_TRIES);
+		return (int) Option.of(session.getAttribute(SESSION_ATTR_SUCCESS_TRIES)).getOrElse(0);
 	}
 
 	public void addToUsedIDS(Integer usedID) {
