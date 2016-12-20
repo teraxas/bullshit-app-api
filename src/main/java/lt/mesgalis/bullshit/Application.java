@@ -22,9 +22,7 @@ public class Application {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(Application.class, args);
-
-        printLoadedBeans(ctx);
-        log.info("JDBC_DATABASE_URL: " + System.getenv("JDBC_DATABASE_URL"));
+		printInfo();
     }
 
     @Bean
@@ -32,13 +30,10 @@ public class Application {
         return new MapSessionRepository();
     }
 
-    public static void printLoadedBeans(ConfigurableApplicationContext ctx) {
-        log.debug("Beans loaded:");
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            log.debug("   " + beanName);
-        }
+    public static void printInfo() {
+		String databaseUrl = System.getenv("JDBC_DATABASE_URL");
+		log.info("JDBC_DATABASE_URL: " + databaseUrl);
+		log.info(databaseUrl == null ? "Running on in-memory DB" : "Running on PostgreSQL DB");
     }
 
 }
