@@ -1,8 +1,7 @@
 package lt.mesgalis.bullshit.helper.impl;
 
+import javaslang.collection.List;
 import javaslang.collection.Set;
-import javaslang.collection.TreeSet;
-import javaslang.control.Option;
 import lt.mesgalis.bullshit.data.QuestionCrud;
 import lt.mesgalis.bullshit.helper.QuestionHelper;
 import lt.mesgalis.bullshit.helper.SessionHelper;
@@ -12,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpSession;
 import java.util.Random;
 
 @Component
@@ -23,15 +21,17 @@ public class QuestionHelperImpl implements QuestionHelper {
 	@Autowired private QuestionCrud questions;
 	@Autowired private SessionHelper session;
 
+	private List<Question> questionsCache;
+
 	@Override
 	public Question getRandomQuestion() {
-		Long id = getRandomQuestionID(session.getUsedQuestions());
-		if (id == null) {
+		Integer cacheIndex = getRandomQuestionCacheIndex(session.getUsedQuestions());
+		if (cacheIndex == null) {
 			return null;
 		}
 
-		Question question = questions.findOne(id);
-		session.addToUsedIDS(id.intValue());
+		Question question = getQuestionFromCache(cacheIndex);
+		session.addToUsedIDS(cacheIndex);
 		log.debug("Next question: " + question);
 		return question;
 	}
@@ -47,7 +47,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 		return question.isBullshit() == answer;
 	}
 
-	private Long getRandomQuestionID(Set<Integer> usedIds) {
+	private Integer getRandomQuestionCacheIndex(Set<Integer> usedIds) {
 		long count = questions.count();
 
 		if (usedIds != null && count == usedIds.size()) {
@@ -58,12 +58,23 @@ public class QuestionHelperImpl implements QuestionHelper {
 
 		int nextID;
 		do {
-			nextID = random.nextInt((int) count--);
-			nextID++;
+			nextID = random.nextInt((int) count - 1);
 		} while (usedIds != null && usedIds.contains(nextID));
 
-		log.debug("Next question ID: " + nextID);
-		return Long.valueOf(nextID);
+		log.debug("Next question ID: " + nextID + "; Total question count = " + count + "; Used IDs in session: " + usedIds);
+		return nextID;
+	}
+
+	private Question getQuestionFromCache(int index) {
+		if (questionsCache == null || questionsCache.isEmpty()) {
+			loadQuestions();
+		}
+		return questionsCache.get(index);
+	}
+
+	//TODO : probably needs to be loaded to a map, not List
+	private void loadQuestions() {
+		this.questionsCache = List.ofAll(questions.findAll());
 	}
 
 }
