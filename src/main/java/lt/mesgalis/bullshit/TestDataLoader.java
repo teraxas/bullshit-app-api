@@ -20,12 +20,12 @@ public class TestDataLoader {
 	@Autowired private QuestionCrud questions;
 
 	private static final List<Question> QUESTIONS_LOAD = List.of(
-			new Question(1L, "First man on the moon had strong arms", true),
-			new Question(2L, "42 is the answer to meaning of life and universe and everything", true),
-			new Question(3L, "No bullshit here", true),
-			new Question(4L, "Venesuela is the worlds richest country", true),
-			new Question(5L, "Freddie Mercury didn't want to live forever", false),
-			new Question(6L, "Beatles had a concert in Vilnius", true)
+			new Question(1L, "First man on the moon had strong arms", null, true),
+			new Question(2L, "42 is the answer to meaning of life and universe and everything", null, true),
+			new Question(3L, "No bullshit here", null, true),
+			new Question(4L, "Venesuela is the worlds richest country", null, true),
+			new Question(5L, "Freddie Mercury didn't want to live forever", null, false),
+			new Question(6L, "Beatles had a concert in Vilnius", null, true)
 	);
 
 	@PostConstruct
