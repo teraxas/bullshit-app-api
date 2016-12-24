@@ -17,8 +17,14 @@ public class QuestionsController {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionsController.class);
 
-	@Autowired private QuestionHelper questions;
-	@Autowired private SessionHelper session;
+	private QuestionHelper questions;
+	private SessionHelper session;
+
+	@Autowired
+	public QuestionsController(QuestionHelper questions, SessionHelper session) {
+		this.questions = questions;
+		this.session = session;
+	}
 
 	@RequestMapping("/get")
 	public Question getQuestion() {
@@ -38,6 +44,11 @@ public class QuestionsController {
 	private static class Answer {
 		public Long id;
 		public Boolean answer;
+
+		@Override
+		public String toString() {
+			return String.format("Answer{id=%d, answer=%s}", id, answer);
+		}
 	}
 
 	private static class ResultsResponse {

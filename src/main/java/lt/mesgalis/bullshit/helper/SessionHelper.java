@@ -15,10 +15,15 @@ public class SessionHelper {
 	private static final String SESSION_ATTR_TOTAL_TRIES = "TOTAL_TRIES";
 	private static final String SESSION_ATTR_SUCCESS_TRIES = "SUCCESS_TRIES";
 
-	@Autowired private HttpSession session;
+	private HttpSession session;
 
-	public Set<Integer> getUsedQuestions() {
-		return (Set<Integer>) session.getAttribute(SESSION_ATTR_USED_QUESTION_IDS);
+	@Autowired
+	public SessionHelper(HttpSession session) {
+		this.session = session;
+	}
+
+	public Set<Long> getUsedQuestions() {
+		return (Set<Long>) session.getAttribute(SESSION_ATTR_USED_QUESTION_IDS);
 	}
 
 	public int getTotalTries() {
@@ -29,7 +34,7 @@ public class SessionHelper {
 		return (int) Option.of(session.getAttribute(SESSION_ATTR_SUCCESS_TRIES)).getOrElse(0);
 	}
 
-	public void addToUsedIDS(Integer usedID) {
+	public void addToUsedIDS(Long usedID) {
 		session.setAttribute(SESSION_ATTR_USED_QUESTION_IDS,
 				Option.of(getUsedQuestions())
 						.getOrElse(TreeSet.empty())

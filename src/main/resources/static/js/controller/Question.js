@@ -7,9 +7,9 @@ angular.module('bullshitApp').controller('question', function($http, $scope) {
 		$http.get('question/get/').then(function(response) {
 			$scope.question = response.data;
 			$scope.lastResponseResult = null;
-//			$rootScope.$$phase || $rootScope.$apply();
 		}).finally(function() {
 			$scope.loading = false;
+			$rootScope.$$phase || $rootScope.$apply();
 		});
 	};
 
@@ -23,6 +23,7 @@ angular.module('bullshitApp').controller('question', function($http, $scope) {
 			$scope.lastResponseResult.lastResult = booleanToString($scope.lastResponseResult.lastResult);
 		}).finally(function() {
 			$scope.loading = false;
+			$rootScope.$$phase || $rootScope.$apply();
 		});
 	};
 
