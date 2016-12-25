@@ -1,6 +1,6 @@
 package lt.mesgalis.bullshit.helper.impl;
 
-import javaslang.API.*;
+import static javaslang.API.*;
 import javaslang.collection.List;
 import javaslang.collection.Set;
 import javaslang.collection.TreeSet;
@@ -59,7 +59,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 			case 0:
 				return null;
 			case 1:
-				return unusedQuestions.get(0);
+				return unusedQuestions.get();
 			default:
 				int nextID = new Random().nextInt(unusedQuestions.length() - 1);
 				return unusedQuestions.get(nextID);
