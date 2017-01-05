@@ -37,6 +37,11 @@ public class QuestionsController {
 		return buildResultsResponse(result);
 	}
 
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public void answerQuestion(@RequestBody Question question) {
+		questions.addQuestionIfAllowed(question);
+	}
+
 	private ResultsResponse buildResultsResponse(boolean result) {
 		return new ResultsResponse(result, session.getTotalTries(), session.getSuccessTries());
 	}

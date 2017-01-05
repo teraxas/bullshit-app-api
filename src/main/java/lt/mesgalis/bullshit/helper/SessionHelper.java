@@ -15,6 +15,8 @@ public class SessionHelper {
 	private static final String SESSION_ATTR_TOTAL_TRIES = "TOTAL_TRIES";
 	private static final String SESSION_ATTR_SUCCESS_TRIES = "SUCCESS_TRIES";
 
+	private static final int PERCENTS_TO_BE_WORTHY = 75;
+
 	private HttpSession session;
 
 	@Autowired
@@ -56,4 +58,8 @@ public class SessionHelper {
 						.getOrElse(0) + 1);
 	}
 
+	public boolean isWorthyToAddQuestion(int questionsCount) {
+		return getTotalTries() == questionsCount
+				&& getSuccessTries() > questionsCount*(PERCENTS_TO_BE_WORTHY/100.0f);
+	}
 }

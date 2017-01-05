@@ -6,6 +6,7 @@ import javaslang.collection.Set;
 import javaslang.collection.TreeSet;
 import javaslang.control.Option;
 import lt.mesgalis.bullshit.data.QuestionCrud;
+import lt.mesgalis.bullshit.exception.UnworthyException;
 import lt.mesgalis.bullshit.helper.QuestionHelper;
 import lt.mesgalis.bullshit.helper.SessionHelper;
 import lt.mesgalis.bullshit.model.Question;
@@ -48,6 +49,21 @@ public class QuestionHelperImpl implements QuestionHelper {
 	public boolean checkAnswer(long id, boolean answer) {
 		Question question = questions.findOne(id);
 		return question.isBullshit() == answer;
+	}
+
+	@Override
+	public void clearQuestionsCache() {
+		this.questionsCache = null;
+	}
+
+	@Override
+	public void addQuestionIfAllowed(Question question) {
+		if (session.isWorthyToAddQuestion(questionsCache.size())) {
+			questions.save(question);
+		} else {
+			throw new UnworthyException("User isn't worthy to add questions");
+		}
+
 	}
 
 	private Question getRandomQuestionFromCache(Set<Long> usedIds) {
