@@ -9,7 +9,7 @@ App is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 
 * Get JDK 1.8
 * Setup Maven (Script is provided)
-* run ```mvn spring-boot:run``` to launch tomcat on '''localhost:8080```
+* run ```mvn spring-boot:run``` to launch tomcat on ```localhost:8080```
 * Import as Maven project to your favorite IDE (optional)
 * From this point - maven should take care of the rest:
   * Download back-end dependencies
