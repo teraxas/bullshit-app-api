@@ -13,6 +13,7 @@ I started it with a target of learning some new stuff about AngularJS and Spring
   * Use Bower to download front-end dependencies:
     * AngularJS
     * Bootstrap
+* To run with PostgreSQL installed - setup environment variable JDBC_DATABASE_URL (Database URL in JDBC format). It's also a standard Heroku Java setup variable.
 * To run without PostgreSQL installed - run with "dev" Spring Boot profile - H2 embeded DB will be used as fallback:
 ```
 -Dspring.profiles.active=dev
