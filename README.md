@@ -12,13 +12,10 @@ App is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 * run ```mvn spring-boot:run``` to launch tomcat on ```localhost:8080```
 * Import as Maven project to your favorite IDE (optional)
 * From this point - maven should take care of the rest:
-  * Download back-end dependencies
-  * Download Node.js
-  * Download Bower
-  * Use Bower to download front-end dependencies (part of Maven build):
-    * AngularJS
-    * Bootstrap
-    * ...
+    * Download back-end dependencies
+    * Download Node.js
+    * Download Bower
+    * Use Bower to download front-end dependencies (part of Maven build)
 * To run with PostgreSQL installed - setup environment variable JDBC_DATABASE_URL (Database URL in JDBC format). It's also a standard Heroku Java setup variable.
 * To run without PostgreSQL installed - run with "dev" Spring Boot profile - H2 embeded DB will be used as fallback:
 ```
