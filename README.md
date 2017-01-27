@@ -1,7 +1,7 @@
 # IT'S NOT CRAP. IT'S BULLSHIT! #
 
 This is a simple app with facts as questions, either true or bullshit. 
-I started it with a target of learning some new stuff about AngularJS and Spring Boot.
+I started it with a target of learning some new stuff about AngularJS, Spring Boot and Javaslang functional library.
 
 App is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 
