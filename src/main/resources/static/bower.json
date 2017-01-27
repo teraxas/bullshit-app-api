@@ -28,8 +28,9 @@
   ],
   "dependencies": {
     "angular": "angularjs#^1.6.0",
-	"angular-animate": "angularjs#^1.6.0",
-	"angular-touch": "angularjs#^1.6.0",
+	"angular-animate": "angular-animate#^1.6.0",
+	"angular-touch": "angular-touch#^1.6.0",
+	"angular-sanitize": "angular-sanitize#^1.6.0",
 	"angular-bootstrap": "^2.4.0",
 	"jquery": "^3.1.1",
 	"bootstrap": "^3.3.7"

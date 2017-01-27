@@ -1,1 +1,1 @@
-angular.module('bullshitApp', []);
+angular.module('bullshitApp', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);

@@ -1,4 +1,4 @@
-angular.module('bullshitApp').component('addBullshit', {
+angular.module('bullshitApp').component('addBullshitDialog', {
 //  templateUrl: '/path/to/myComponent.html'
 template: `<div class="modal-body"><div>{{$ctrl.greeting}}</div>
 <label>Name To Edit</label> <input ng-model="$ctrl.modalData.name"><br>
