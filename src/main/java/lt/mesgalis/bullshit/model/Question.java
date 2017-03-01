@@ -43,6 +43,7 @@ public class Question {
 		return explanation;
 	}
 
+	@ManyToOne
 	public User getCreator() {
 		return creator;
 	}

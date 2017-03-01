@@ -1,9 +1,9 @@
 package lt.mesgalis.bullshit.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "USER")
 public class User {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
