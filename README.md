@@ -2,6 +2,9 @@
 
 This is a simple app with facts as questions, either true or bullshit. 
 I started it with a target of learning some new stuff about AngularJS, Spring Boot and Javaslang functional library.
+During the progress decided to remove all frontend code and write it sepparatelly on Angular instead of AngularJS.
+
+Front-end project: [bullshit-app-frontend](https://bitbucket.org/teraxas/bullshit-app-frontend)
 
 App is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 
