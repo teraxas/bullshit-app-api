@@ -6,8 +6,8 @@
   },
   "apps": [
     {
-      "root": "src",
-      "outDir": "dist",
+      "root": "src/",
+      "outDir": "src/main/resources/static/",
       "assets": [
         "assets",
         "favicon.png"

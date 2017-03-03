@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import { Question, NewQuestion } from '../model/question';
 import { Result } from '../model/result';
+import { SerializationHelper } from '../util/serialization.helper';
 
 @Injectable()
 export class QuestionService {
@@ -20,36 +21,33 @@ export class QuestionService {
   getQuestion(): Observable<Question> {
     return this.http.get(this.questionUrl)
                     .map(this.extractData)
+                    .map(obj => SerializationHelper.toInstance(new Question(), obj))
                     .catch(this.handleError);
   }
 
   answer(question: Question, bullshit: boolean): Observable<Result> {
     return this.http.post(this.answerUrl, {id: question.id, bullshit: bullshit})
                     .map(this.extractData)
+                    .map(obj => SerializationHelper.toInstance(new Result(), obj))
                     .catch(this.handleError);
   }
 
-  create(question: Question): Observable<Result> {
+  create(question: Question): Observable<Question> {
     return this.http.post(this.createUrl, question)
                     .map(this.extractData)
+                    .map(obj => SerializationHelper.toInstance(new Question(), obj))
                     .catch(this.handleError);
   }
 
   private extractData(res: Response) {
+    console.debug('Response: ',  res);
     let body = res.json();
-    return body.data || { };
+    return body || { };
   }
 
-  private handleError (error: Response | any) {
+  private handleError (error: any) {
     // TODO: Use remote logging ?
     let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
     console.error(errMsg);
     return Observable.throw(errMsg);
   }

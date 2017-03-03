@@ -11,8 +11,6 @@ import org.springframework.session.MapSessionRepository;
 import org.springframework.session.SessionRepository;
 import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
 
-import java.util.Arrays;
-
 @SpringBootApplication
 @EnableSpringHttpSession
 @EnableJpaRepositories("lt.mesgalis.bullshit.data")

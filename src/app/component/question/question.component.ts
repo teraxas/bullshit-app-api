@@ -39,6 +39,7 @@ export class QuestionComponent implements OnInit {
   }
 
   setQuestion(question: Question) {
+    console.debug('Loaded question: ' + question);
     this.question = question;
     this.lastResponseResult = null;
   }

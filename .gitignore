@@ -18,6 +18,7 @@
 .c9/
 *.launch
 .settings/
+bin
 
 # IDE - VSCode
 .vscode/*
