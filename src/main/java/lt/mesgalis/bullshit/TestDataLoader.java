@@ -30,7 +30,9 @@ public class TestDataLoader {
 
 	@PostConstruct
 	public void initData() {
+		log.info("DELETING ALL QUESTIONS");
 		questions.deleteAll();
+		log.info("SAVING NEW QUESTIONS");
 		questions.save(QUESTIONS_LOAD);
 		questions.findAll().forEach(q -> log.info("Question added: " + q.toString()));
 	}

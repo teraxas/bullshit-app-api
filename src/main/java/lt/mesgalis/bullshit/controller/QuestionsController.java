@@ -38,7 +38,7 @@ public class QuestionsController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public void answerQuestion(@RequestBody Question question) {
+	public void createQuestion(@RequestBody Question question) {
 		questions.addQuestionIfAllowed(question);
 	}
 
