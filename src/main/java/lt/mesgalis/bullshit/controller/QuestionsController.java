@@ -28,17 +28,20 @@ public class QuestionsController {
 
 	@RequestMapping("/get")
 	public Question getQuestion() {
+		log.info("Get question request");
 		return questions.getRandomQuestion();
 	}
 
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
 	public ResultsResponse answerQuestion(@RequestBody Answer request) {
+		log.info("Answer question request: " + request.toString());
 		boolean result = questions.checkAnswer(request.id, request.answer);
 		return buildResultsResponse(result);
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void createQuestion(@RequestBody Question question) {
+		log.info("Create question request: " + question.toString());
 		questions.addQuestionIfAllowed(question);
 	}
 
