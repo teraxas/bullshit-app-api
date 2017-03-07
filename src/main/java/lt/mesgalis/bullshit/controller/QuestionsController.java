@@ -76,7 +76,7 @@ public class QuestionsController {
 
 		@Override
 		public String toString() {
-			return String.format("ResultsResponse{lastResult=%s, totalAnswers=%d, successfulAnswers=%d}", lastResult, totalAnswers, successfulAnswers);
+			return String.format("ResultsResponse{lastResult=%s, totalAnswers=%d, successfulAnswers=%d, worthyToAddBullshit=%s}", lastResult, totalAnswers, successfulAnswers, worthyToAddBullshit);
 		}
 	}
 

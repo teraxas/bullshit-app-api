@@ -36,10 +36,9 @@ export class QuestionComponent implements OnInit {
   setlastResponseResult(result: Result) {
     this.lastResponseResult = result;
 
-    // FIXME : some better bussiness logic would be nice
-    // if (this.lastResponseResult.successfulAnswers === this.lastResponseResult.totalAnswers) {
-    //   this.worthyUser.emit(this.lastResponseResult);
-    // }
+    if (this.lastResponseResult.worthyToAddBullshit) {
+      this.worthyUser.emit(this.lastResponseResult);
+    }
   }
 
   setQuestion(newQuestion: Question) {

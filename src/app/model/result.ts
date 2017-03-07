@@ -8,6 +8,7 @@ export class Result {
     lastResult: boolean;
     totalAnswers: number;
     successfulAnswers: number;
+    worthyToAddBullshit: false;
     // explanation: string;
 
     constructor() { }
