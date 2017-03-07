@@ -46,9 +46,11 @@ public class QuestionHelperImpl implements QuestionHelper {
 	}
 
 	@Override
-	public boolean checkAnswer(long id, boolean answer) {
+	public boolean checkAnswerAndMarkSuccess(long id, boolean answer) {
 		Question question = questions.findOne(id);
-		return question.isBullshit() == answer;
+		boolean success = question.isBullshit() == answer;
+		session.addQuestionTry(success);
+		return success;
 	}
 
 	@Override
@@ -58,12 +60,15 @@ public class QuestionHelperImpl implements QuestionHelper {
 
 	@Override
 	public void addQuestionIfAllowed(Question question) {
-		if (session.isWorthyToAddQuestion(questionsCache.size())) {
+		if (isWorthyToAddQuestion()) {
 			questions.save(question);
 		} else {
 			throw new UnworthyException("User isn't worthy to add questions");
 		}
+	}
 
+	public boolean isWorthyToAddQuestion() {
+		return session.isWorthyToAddQuestion(questionsCache.size());
 	}
 
 	private Question getRandomQuestionFromCache(Set<Long> usedIds) {

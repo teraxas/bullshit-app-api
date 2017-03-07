@@ -28,25 +28,27 @@ public class QuestionsController {
 
 	@RequestMapping("/get")
 	public Question getQuestion() {
-		log.info("Get question request");
-		return questions.getRandomQuestion();
+		Question randomQuestion = questions.getRandomQuestion();
+		log.debug("Get question request. Question: {}", randomQuestion);
+		return randomQuestion;
 	}
 
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
 	public ResultsResponse answerQuestion(@RequestBody Answer request) {
-		log.info("Answer question request: " + request.toString());
-		boolean result = questions.checkAnswer(request.id, request.answer);
-		return buildResultsResponse(result);
+		boolean result = questions.checkAnswerAndMarkSuccess(request.id, request.answer);
+		ResultsResponse resultsResponse = buildResultsResponse(result);
+		log.debug("Answer question request: {}; Result: {}", request, resultsResponse);
+		return resultsResponse;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void createQuestion(@RequestBody Question question) {
-		log.info("Create question request: " + question.toString());
+		log.debug("Create question request: {}", question);
 		questions.addQuestionIfAllowed(question);
 	}
 
 	private ResultsResponse buildResultsResponse(boolean result) {
-		return new ResultsResponse(result, session.getTotalTries(), session.getSuccessTries());
+		return new ResultsResponse(result, session.getTotalTries(), session.getSuccessTries(), questions.isWorthyToAddQuestion());
 	}
 
 	private static class Answer {
@@ -63,11 +65,18 @@ public class QuestionsController {
 		public boolean lastResult = false;
 		public int totalAnswers = 0;
 		public int successfulAnswers = 0;
+		public boolean worthyToAddBullshit = false;
 
-		public ResultsResponse(boolean lastResult, int totalAnswers, int successfulAnswers) {
+		public ResultsResponse(boolean lastResult, int totalAnswers, int successfulAnswers, boolean worthyToAddBullshit) {
 			this.lastResult = lastResult;
 			this.totalAnswers = totalAnswers;
 			this.successfulAnswers = successfulAnswers;
+			this.worthyToAddBullshit = worthyToAddBullshit;
+		}
+
+		@Override
+		public String toString() {
+			return String.format("ResultsResponse{lastResult=%s, totalAnswers=%d, successfulAnswers=%d}", lastResult, totalAnswers, successfulAnswers);
 		}
 	}
 
