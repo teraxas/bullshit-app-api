@@ -60,6 +60,6 @@ public class SessionHelper {
 
 	public boolean isWorthyToAddQuestion(int questionsCount) {
 		return getTotalTries() == questionsCount
-				&& getSuccessTries() > questionsCount*(PERCENTS_TO_BE_WORTHY/100.0f);
+				&& questionsCount > getSuccessTries()*(PERCENTS_TO_BE_WORTHY/100.0f);
 	}
 }
