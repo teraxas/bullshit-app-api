@@ -6,12 +6,19 @@ After some time rewrote whole thing to use Angular (2) and moved to gradle (prev
 
 The app is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 
-### How do I get set up? ###
+## How do I get set up? ###
 
 * Get JDK 1.8
 * run ```gradlew bootRun``` to launch tomcat on ```localhost:8080```
 * To run with PostgreSQL installed - setup environment variable JDBC_DATABASE_URL (Database URL in JDBC format). It's also a standard Heroku Java setup variable.
 * To run without PostgreSQL installed - run with "dev" Spring Boot profile - H2 embeded DB will be used as fallback: ```-Dspring.profiles.active=dev```
+
+### Swagger
+
+API docs are available.
+
+* Swagger ui: [Swagger ui](http://localhost:8080/swagger-ui.html)
+* Swagger API docs JSON: [api-docs](http://localhost:8080/v2/api-docs)
 
 ### Contribution guidelines ###
 
@@ -19,6 +26,6 @@ The app is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 * Code reviews
 * Other guidelines
 
-### Who do I talk to? ###
+## Who do I talk to? ###
 
 Karolis Jocevičius ([*@kjocevicius*](https://twitter.com/kjocevicius)) - passionate Java developer from Lithuania

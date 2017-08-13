@@ -1,26 +1,31 @@
 package lt.mesgalis.bullshit;
 
-import org.apache.catalina.filters.CorsFilter;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.session.MapSessionRepository;
 import org.springframework.session.SessionRepository;
 import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import static springfox.documentation.builders.PathSelectors.regex;
 
 @SpringBootApplication
+@Configuration
 @EnableSpringHttpSession
 @EnableJpaRepositories("lt.mesgalis.bullshit.data")
+@EnableSwagger2
 public class Application {
 
     private static final Logger log = LogManager.getLogger(Application.class);
@@ -53,19 +58,13 @@ public class Application {
 		};
 	}
 
-//	@Bean
-//	public FilterRegistrationBean corsFilter() {
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		CorsConfiguration config = new CorsConfiguration();
-//		config.setAllowCredentials(true);
-//		config.addAllowedOrigin(appConfig.getAllowedOrigin());
-//		config.addAllowedHeader("*");
-//		config.addAllowedMethod("*");
-//		source.registerCorsConfiguration("/**", config);
-//		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-//		bean.setOrder(0);
-//		return bean;
-//	}
+	@Bean
+	public Docket productApi() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.select().apis(RequestHandlerSelectors.basePackage("lt.mesgalis.bullshit.controller"))
+				.paths(regex("/question.*"))
+				.build();
+	}
 
     public static void printInfo() {
 		String databaseUrl = System.getenv("JDBC_DATABASE_URL");

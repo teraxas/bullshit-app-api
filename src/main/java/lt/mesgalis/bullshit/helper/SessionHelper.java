@@ -59,7 +59,12 @@ public class SessionHelper {
 	}
 
 	public boolean isWorthyToAddQuestion(int questionsCount) {
-		return getTotalTries() == questionsCount
-				&& questionsCount > getSuccessTries()*(PERCENTS_TO_BE_WORTHY/100.0f);
+//		return getTotalTries() == questionsCount
+//				&& questionsCount > getSuccessTries()*(PERCENTS_TO_BE_WORTHY/100.0f);
+		return true;
+	}
+
+	public void forgetMe() {
+		session.invalidate();
 	}
 }

@@ -26,11 +26,17 @@ public class QuestionsController {
 		this.session = session;
 	}
 
-	@RequestMapping("/get")
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Question getQuestion() {
 		Question randomQuestion = questions.getRandomQuestion();
 		log.debug("Get question request. Question: {}", randomQuestion);
 		return randomQuestion;
+	}
+
+	@RequestMapping(value = "/forgetMe", method = RequestMethod.DELETE)
+	public void forgetMe() {
+		log.debug("Forget me request.");
+		session.forgetMe();
 	}
 
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)

@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.2.RELEASE'
+		springBootVersion = '1.5.6.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -20,7 +20,7 @@ jar {
 }
 
 bootRun {
-   jvmArgs = ['-Dspring.profiles.active=dev']
+	systemProperties System.properties
 }
 
 sourceCompatibility = 1.8
@@ -35,6 +35,9 @@ dependencies {
 	compile group: 'io.javaslang', name: 'javaslang', version: '2.0.5'
 	compile group: 'com.google.guava', name: 'guava', version: '21.0'
 	compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1201-jdbc4'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
 	runtime group: 'com.h2database', name: 'h2', version: '1.4.193'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
