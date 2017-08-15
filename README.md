@@ -6,12 +6,20 @@ After some time rewrote whole thing to use Angular (2) and moved to gradle (prev
 
 The app is hosted on Heroku: [bullshit-app-api](https://bullshit-app-api.herokuapp.com/)
 
+Frontend app:
+ * [bullshit-app on heroku](https://bullshit-app.herokuapp.com/)
+ * [bullshit-app on bitbucket](https://bitbucket.org/teraxas/bullshit-app-frontend-v2/)
+ 
 ## How do I get set up? ###
 
 * Get JDK 1.8
 * run ```gradlew bootRun``` to launch tomcat on ```localhost:8080```
 * To run with PostgreSQL installed - setup environment variable JDBC_DATABASE_URL (Database URL in JDBC format). It's also a standard Heroku Java setup variable.
 * To run without PostgreSQL installed - run with "dev" Spring Boot profile - H2 embeded DB will be used as fallback: ```-Dspring.profiles.active=dev```
+
+## Pipelines
+
+On commit to master, pipelines deploy app automatically to Heroku.
 
 ### Swagger
 
