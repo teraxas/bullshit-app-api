@@ -4,7 +4,7 @@ This is a simple app with facts as questions, either true or bullshit.
 I started it with a target of learning some new stuff about AngularJS, Spring Boot and Javaslang functional library.
 After some time rewrote whole thing to use Angular (2) and moved to gradle (previously used maven) - there is a git tag right before this switch.
 
-The app is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
+The app is hosted on Heroku: [bullshit-app-api](https://bullshit-app-api.herokuapp.com/)
 
 ## How do I get set up? ###
 
@@ -17,8 +17,8 @@ The app is hosted on Heroku: [bullshit-app](https://bullshit-app.herokuapp.com/)
 
 API docs are available.
 
-* Swagger ui: [Swagger ui](http://localhost:8080/swagger-ui.html)
-* Swagger API docs JSON: [api-docs](http://localhost:8080/v2/api-docs)
+* Swagger ui: [Swagger ui](https://bullshit-app-api.herokuapp.com/swagger-ui.html)
+* Swagger API docs JSON: [api-docs](https://bullshit-app-api.herokuapp.com/v2/api-docs)
 
 ### Contribution guidelines ###
 
