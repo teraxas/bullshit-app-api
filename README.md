@@ -7,8 +7,8 @@ After some time rewrote whole thing to use Angular (2) and moved to gradle (prev
 The app is hosted on Heroku: [bullshit-app-api](https://bullshit-app-api.herokuapp.com/)
 
 Frontend app:
- * [bullshit-app on heroku](https://bullshit-app.herokuapp.com/)
- * [bullshit-app on bitbucket](https://bitbucket.org/teraxas/bullshit-app-frontend-v2/)
+* [bullshit-app on heroku](https://bullshit-app.herokuapp.com/)
+* [bullshit-app on bitbucket](https://bitbucket.org/teraxas/bullshit-app-frontend-v2/)
  
 ## How do I get set up? ###
 
