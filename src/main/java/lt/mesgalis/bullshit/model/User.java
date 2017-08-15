@@ -3,7 +3,7 @@ package lt.mesgalis.bullshit.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "BS_USER")
 public class User {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
