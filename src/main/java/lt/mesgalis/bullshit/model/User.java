@@ -1,17 +1,20 @@
 package lt.mesgalis.bullshit.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "BS_USER")
 public class User {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
 	private String country;
 
+	@Id
+	@GeneratedValue
+	@Column(unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}

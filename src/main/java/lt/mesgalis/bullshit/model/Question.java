@@ -1,8 +1,12 @@
 package lt.mesgalis.bullshit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,16 +24,15 @@ public class Question {
 
 	public Question() {}
 
-	public Question(Long id, String question, String explanation, boolean bullshit, User creator) {
-		this.id = id;
-		this.question = question;
-		this.explanation = explanation;
-		this.bullshit = bullshit;
-		this.creator = creator;
+	public Question(String question, String explanation, boolean bullshit) {
+		this.setQuestion(question);
+		this.setExplanation(explanation);
+		this.setBullshit(bullshit);
 	}
 
-	@Id @NotNull
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue
+	@Column(unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -43,7 +46,8 @@ public class Question {
 		return explanation;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+	@JoinColumn(nullable = false, updatable = false)
 	public User getCreator() {
 		return creator;
 	}
