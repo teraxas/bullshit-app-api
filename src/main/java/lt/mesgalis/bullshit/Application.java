@@ -49,6 +49,7 @@ public class Application {
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
+		log.info("Allowing cross-origin for: " + appConfig.getAllowedOrigin());
 		return new WebMvcConfigurerAdapter() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
