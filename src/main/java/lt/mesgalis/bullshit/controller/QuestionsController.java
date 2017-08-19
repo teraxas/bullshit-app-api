@@ -33,12 +33,6 @@ public class QuestionsController {
 		return randomQuestion;
 	}
 
-	@RequestMapping(value = "/forgetMe", method = RequestMethod.DELETE)
-	public void forgetMe() {
-		log.debug("Forget me request.");
-		session.forgetMe();
-	}
-
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
 	public ResultsResponse answerQuestion(@RequestBody Answer request) {
 		boolean result = questions.checkAnswerAndMarkSuccess(request.id, request.answer);

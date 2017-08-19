@@ -1,8 +1,6 @@
 package lt.mesgalis.bullshit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -46,8 +44,8 @@ public class Question {
 		return explanation;
 	}
 
-	@ManyToOne(cascade = javax.persistence.CascadeType.ALL)
-	@JoinColumn(nullable = false, updatable = false)
+	@ManyToOne(cascade = {CascadeType.MERGE})
+	@JoinColumn(nullable = false, updatable = false, referencedColumnName = "id")
 	public User getCreator() {
 		return creator;
 	}

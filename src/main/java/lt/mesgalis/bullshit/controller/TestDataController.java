@@ -1,27 +1,29 @@
-package lt.mesgalis.bullshit;
+package lt.mesgalis.bullshit.controller;
 
 import javaslang.collection.List;
 import lt.mesgalis.bullshit.data.QuestionCrud;
+import lt.mesgalis.bullshit.data.StatusCrud;
 import lt.mesgalis.bullshit.data.UserCrud;
 import lt.mesgalis.bullshit.model.Question;
+import lt.mesgalis.bullshit.model.Status;
 import lt.mesgalis.bullshit.model.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 
-@Component
-@Profile("dev")
-public class TestDataLoader {
+@RestController
+@RequestMapping("/test")
+public class TestDataController {
 
-	private static final Logger log = LogManager.getLogger(TestDataLoader.class);
+	private static final Logger log = LogManager.getLogger(TestDataController.class);
 
-	@Autowired private QuestionCrud questions;
-	@Autowired private UserCrud users;
+	private QuestionCrud questions;
+	private UserCrud users;
+	private StatusCrud status;
 
 	private static final User USER;
 
@@ -47,16 +49,31 @@ public class TestDataLoader {
 		);
 	}
 
-	@PostConstruct
+	public TestDataController(QuestionCrud questions, UserCrud users, StatusCrud status) {
+		this.questions = questions;
+		this.users = users;
+		this.status = status;
+	}
+
 	@Transactional
-	public void initData() {
-		log.info("DELETING ALL QUESTIONS");
-		questions.deleteAll();
+	@RequestMapping(value = "/loadData", method = RequestMethod.GET)
+	public void loadData() {
+		Status loaded = status.findOne(Status.StatusKey.TEST_DATA_LOADED);
+
+		if (loaded != null) {
+			throw new TestLoadException("Test data is already loaded");
+		}
+
 		log.info("SAVING NEW QUESTIONS");
 		User user = users.save(USER);
 		QUESTIONS_LOAD.forEach(q -> q.setCreator(user));
 		questions.save(QUESTIONS_LOAD);
 		questions.findAll().forEach(q -> log.info("Question added: " + q.toString()));
+		status.save(new Status(Status.StatusKey.TEST_DATA_LOADED, "loaded"));
 	}
 
+	private class TestLoadException extends RuntimeException {
+		public TestLoadException(String s) {
+		}
+	}
 }

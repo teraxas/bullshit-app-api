@@ -1,19 +1,21 @@
 package lt.mesgalis.bullshit.helper.impl;
 
-import static javaslang.API.*;
 import javaslang.collection.List;
 import javaslang.collection.Set;
 import javaslang.collection.TreeSet;
 import javaslang.control.Option;
 import lt.mesgalis.bullshit.data.QuestionCrud;
+import lt.mesgalis.bullshit.data.UserCrud;
 import lt.mesgalis.bullshit.exception.UnworthyException;
 import lt.mesgalis.bullshit.helper.QuestionHelper;
 import lt.mesgalis.bullshit.helper.SessionHelper;
 import lt.mesgalis.bullshit.model.Question;
+import lt.mesgalis.bullshit.model.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
@@ -23,13 +25,15 @@ public class QuestionHelperImpl implements QuestionHelper {
 	private static final Logger log = LogManager.getLogger(QuestionHelperImpl.class.getName());
 
 	private QuestionCrud questions;
+	private UserCrud users;
 	private SessionHelper session;
 
 	private List<Question> questionsCache;
 
 	@Autowired
-	public QuestionHelperImpl(QuestionCrud questions, SessionHelper session) {
+	public QuestionHelperImpl(QuestionCrud questions, UserCrud users, SessionHelper session) {
 		this.questions = questions;
+		this.users = users;
 		this.session = session;
 	}
 
@@ -59,9 +63,13 @@ public class QuestionHelperImpl implements QuestionHelper {
 	}
 
 	@Override
+	@Transactional
 	public void addQuestionIfAllowed(Question question) {
 		if (isWorthyToAddQuestion()) {
+			User savedUser = users.save(question.getCreator()); // TODO : in future, require registration
+			question.setCreator(savedUser);
 			questions.save(question);
+			clearQuestionsCache();
 		} else {
 			throw new UnworthyException("User isn't worthy to add questions");
 		}
