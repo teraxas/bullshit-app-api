@@ -14,6 +14,7 @@ public class SessionHelper {
 	private static final String SESSION_ATTR_USED_QUESTION_IDS = "USED_QUESTION_IDS";
 	private static final String SESSION_ATTR_TOTAL_TRIES = "TOTAL_TRIES";
 	private static final String SESSION_ATTR_SUCCESS_TRIES = "SUCCESS_TRIES";
+	private static final String SESSION_ATTR_ADDED_QUESTIONS = "ADDED_QUESTIONS";
 
 	private static final int PERCENTS_TO_BE_WORTHY = 50;
 
@@ -34,6 +35,10 @@ public class SessionHelper {
 
 	public int getSuccessTries() {
 		return (int) Option.of(session.getAttribute(SESSION_ATTR_SUCCESS_TRIES)).getOrElse(0);
+	}
+
+	public int getAddedQuestions() {
+		return (int) Option.of(session.getAttribute(SESSION_ATTR_ADDED_QUESTIONS)).getOrElse(0);
 	}
 
 	public void addToUsedIDS(Long usedID) {
@@ -58,9 +63,16 @@ public class SessionHelper {
 						.getOrElse(0) + 1);
 	}
 
+	private void addAddedQuestion() {
+		session.setAttribute(SESSION_ATTR_ADDED_QUESTIONS,
+				Option.of(getSuccessTries())
+						.getOrElse(0) + 1);
+	}
+
+	// TODO make 'worthy' rules more configurable
 	public boolean isWorthyToAddQuestion(int questionsCount) {
-		return getTotalTries() == questionsCount
-				&& questionsCount > getSuccessTries()*(PERCENTS_TO_BE_WORTHY/100.0f);
+		return getTotalTries() == questionsCount / 2 || getTotalTries() == questionsCount
+				&& (getSuccessTries() / getTotalTries()) * 100 > (PERCENTS_TO_BE_WORTHY);
 	}
 
 	public void forgetMe() {

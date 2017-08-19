@@ -1,10 +1,9 @@
 package lt.mesgalis.bullshit.model;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "BS_STATUS")
 public class Status {
 
 	public enum StatusKey {
@@ -13,6 +12,8 @@ public class Status {
 
 	private StatusKey key;
 	private String value;
+
+	public Status() {}
 
 	public Status(StatusKey key, String value) {
 		this.key = key;

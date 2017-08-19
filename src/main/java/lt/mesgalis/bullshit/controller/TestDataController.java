@@ -74,6 +74,7 @@ public class TestDataController {
 
 	private class TestLoadException extends RuntimeException {
 		public TestLoadException(String s) {
+			super(s);
 		}
 	}
 }
