@@ -28,7 +28,7 @@ public class QuestionsController {
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Question getQuestion() {
-		Question randomQuestion = questions.getRandomQuestion();
+		Question randomQuestion = questions.getRandomOrCurrentQuestion();
 		log.debug("Get question request. Question: {}", randomQuestion);
 		return randomQuestion;
 	}

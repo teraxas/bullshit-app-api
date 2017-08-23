@@ -1,7 +1,7 @@
 package lt.mesgalis.bullshit;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,7 +29,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class Application {
 
-    private static final Logger log = LogManager.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	private Config appConfig;
 

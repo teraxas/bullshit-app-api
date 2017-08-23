@@ -15,6 +15,7 @@ public class SessionHelper {
 	private static final String SESSION_ATTR_TOTAL_TRIES = "TOTAL_TRIES";
 	private static final String SESSION_ATTR_SUCCESS_TRIES = "SUCCESS_TRIES";
 	private static final String SESSION_ATTR_ADDED_QUESTIONS = "ADDED_QUESTIONS";
+	private static final String SESSION_ATTR_CURRENT_QUESTION = "CURRENT_QUESTION";
 
 	private static final int PERCENTS_TO_BE_WORTHY = 50;
 
@@ -35,6 +36,18 @@ public class SessionHelper {
 
 	public int getSuccessTries() {
 		return (int) Option.of(session.getAttribute(SESSION_ATTR_SUCCESS_TRIES)).getOrElse(0);
+	}
+
+	public Long getCurrentQuestion() {
+		return (Long) session.getAttribute(SESSION_ATTR_CURRENT_QUESTION);
+	}
+
+	public void setCurrentQuestion(Long questionId) {
+		session.setAttribute(SESSION_ATTR_CURRENT_QUESTION, questionId);
+	}
+
+	public void clearCurrentQuestion() {
+		session.removeAttribute(SESSION_ATTR_CURRENT_QUESTION);
 	}
 
 	public int getAddedQuestions() {

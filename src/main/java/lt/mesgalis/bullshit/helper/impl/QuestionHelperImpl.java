@@ -11,8 +11,8 @@ import lt.mesgalis.bullshit.helper.QuestionHelper;
 import lt.mesgalis.bullshit.helper.SessionHelper;
 import lt.mesgalis.bullshit.model.Question;
 import lt.mesgalis.bullshit.model.User;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ import java.util.Random;
 @Component
 public class QuestionHelperImpl implements QuestionHelper {
 
-	private static final Logger log = LogManager.getLogger(QuestionHelperImpl.class.getName());
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	private QuestionCrud questions;
 	private UserCrud users;
@@ -38,9 +38,21 @@ public class QuestionHelperImpl implements QuestionHelper {
 	}
 
 	@Override
-	public Question getRandomQuestion() {
+	public Question getRandomOrCurrentQuestion() {
+		Option<Long> currentQuestionId = Option.of(session.getCurrentQuestion());
+		if (currentQuestionId.isDefined()) {
+			return Option.of(questions.findOne(currentQuestionId.get())).getOrElse(getRandomQuestion());
+		} else {
+			return getRandomQuestion();
+		}
+	}
+
+	private Question getRandomQuestion() {
 		return Option.of(getRandomQuestionFromCache(session.getUsedQuestions()))
-				.peek(q -> session.addToUsedIDS(q.getId()))
+				.peek(q -> {
+					session.addToUsedIDS(q.getId());
+					session.setCurrentQuestion(q.getId());
+				})
 				.getOrElse((Question) null);
 	}
 
@@ -54,6 +66,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 		Question question = questions.findOne(id);
 		boolean success = question.isBullshit() == answer;
 		session.addQuestionTry(success);
+		session.clearCurrentQuestion();
 		return success;
 	}
 
@@ -76,7 +89,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 	}
 
 	public boolean isWorthyToAddQuestion() {
-		return session.isWorthyToAddQuestion(questionsCache.size());
+		return session.isWorthyToAddQuestion(getQuestionCache().size());
 	}
 
 	private Question getRandomQuestionFromCache(Set<Long> usedIds) {

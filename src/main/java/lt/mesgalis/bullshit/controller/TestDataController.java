@@ -7,8 +7,8 @@ import lt.mesgalis.bullshit.data.UserCrud;
 import lt.mesgalis.bullshit.model.Question;
 import lt.mesgalis.bullshit.model.Status;
 import lt.mesgalis.bullshit.model.User;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class TestDataController {
 
-	private static final Logger log = LogManager.getLogger(TestDataController.class);
+	private static final Logger log = LoggerFactory.getLogger(TestDataController.class);
 
 	private QuestionCrud questions;
 	private UserCrud users;
