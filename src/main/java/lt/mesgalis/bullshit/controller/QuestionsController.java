@@ -41,6 +41,13 @@ public class QuestionsController {
 		return resultsResponse;
 	}
 
+	@RequestMapping(value = "/currentResult", method = RequestMethod.GET)
+	public ResultsResponse answerQuestion() {
+		ResultsResponse resultsResponse = buildResultsResponse(false);
+		log.debug("Get result request: Result: {}", resultsResponse);
+		return resultsResponse;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void createQuestion(@RequestBody Question question) {
 		log.debug("Create question request: {}", question);
