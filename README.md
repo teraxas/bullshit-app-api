@@ -22,6 +22,14 @@ Frontend app:
 
 On commit to master, pipelines deploy app automatically to Heroku.
 
+## Docker
+
+Dockerfile and docker-compose.yml allow running application on Docker with Postgres database.
+To do that you need:
+
+* Have Docker and Docker Compose installed
+* Run ```gradlew buildDocker dockerCompose```
+
 ### Swagger
 
 API docs are available.
