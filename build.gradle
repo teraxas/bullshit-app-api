@@ -1,10 +1,12 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.6.RELEASE'
+		springBootVersion = '2.0.0.M5'
 	}
 	repositories {
 		mavenCentral()
 		jcenter()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,6 +17,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker'
 
 jar {
@@ -22,18 +25,15 @@ jar {
 	version = '0.0.1-SNAPSHOT'
 }
 
-bootRun {
-	systemProperties System.properties
-}
-
 sourceCompatibility = 1.8
 
 dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 
-	compile('org.springframework.session:spring-session')
+	compile('org.springframework.session:spring-session-core')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 
 	compile group: 'io.javaslang', name: 'javaslang', version: '2.0.5'
 	compile group: 'com.google.guava', name: 'guava', version: '21.0'
@@ -48,6 +48,15 @@ dependencies {
 
 repositories {
 	mavenCentral()
+	jcenter()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+bootRun {
+	execSpec {
+		systemProperties System.properties
+	}
 }
 
 task buildDocker(type: Docker, group: docker, dependsOn: build) {

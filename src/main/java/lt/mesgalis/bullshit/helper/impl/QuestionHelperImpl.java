@@ -41,7 +41,7 @@ public class QuestionHelperImpl implements QuestionHelper {
 	public Question getRandomOrCurrentQuestion() {
 		Option<Long> currentQuestionId = Option.of(session.getCurrentQuestion());
 		if (currentQuestionId.isDefined()) {
-			return Option.of(questions.findOne(currentQuestionId.get())).getOrElse(getRandomQuestion());
+			return questions.findById(currentQuestionId.get()).orElse(getRandomQuestion());
 		} else {
 			return getRandomQuestion();
 		}
@@ -63,11 +63,14 @@ public class QuestionHelperImpl implements QuestionHelper {
 
 	@Override
 	public boolean checkAnswerAndMarkSuccess(long id, boolean answer) {
-		Question question = questions.findOne(id);
-		boolean success = question.isBullshit() == answer;
-		session.addQuestionTry(success);
-		session.clearCurrentQuestion();
-		return success;
+		return questions.findById(id)
+				.map(question -> {
+					boolean success = question.isBullshit() == answer;
+					session.addQuestionTry(success);
+					session.clearCurrentQuestion();
+					return success;
+				})
+				.orElseThrow(() -> new IllegalArgumentException("No question found for ID: " + id) );
 	}
 
 	@Override

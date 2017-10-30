@@ -1,5 +1,6 @@
 package lt.mesgalis.bullshit;
 
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -13,14 +14,12 @@ import org.springframework.session.SessionRepository;
 import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static springfox.documentation.builders.PathSelectors.any;
-import static springfox.documentation.builders.PathSelectors.regex;
 
 @SpringBootApplication
 @Configuration
@@ -44,13 +43,13 @@ public class Application {
 
     @Bean
     public SessionRepository getSessionRepository() {
-        return new MapSessionRepository();
+        return new MapSessionRepository(Maps.newHashMap());
     }
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		log.info("Allowing cross-origin for: " + appConfig.getAllowedOrigin());
-		return new WebMvcConfigurerAdapter() {
+		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")

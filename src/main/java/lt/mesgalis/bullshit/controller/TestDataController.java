@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/test")
@@ -58,16 +60,16 @@ public class TestDataController {
 	@Transactional
 	@RequestMapping(value = "/loadData", method = RequestMethod.GET)
 	public void loadData() {
-		Status loaded = status.findOne(Status.StatusKey.TEST_DATA_LOADED);
+		Optional<Status> loaded = status.findById(Status.StatusKey.TEST_DATA_LOADED);
 
-		if (loaded != null) {
+		if (loaded.isPresent()) {
 			throw new TestLoadException("Test data is already loaded");
 		}
 
 		log.info("SAVING NEW QUESTIONS");
 		User user = users.save(USER);
 		QUESTIONS_LOAD.forEach(q -> q.setCreator(user));
-		questions.save(QUESTIONS_LOAD);
+		questions.saveAll(QUESTIONS_LOAD);
 		questions.findAll().forEach(q -> log.info("Question added: " + q.toString()));
 		status.save(new Status(Status.StatusKey.TEST_DATA_LOADED, "loaded"));
 	}
