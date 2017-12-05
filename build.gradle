@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.M5'
+		springBootVersion = '2.0.0.M6'
 	}
 	repositories {
 		mavenCentral()
@@ -33,7 +33,6 @@ dependencies {
 	compile('org.springframework.session:spring-session-core')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 
 	compile group: 'io.javaslang', name: 'javaslang', version: '2.0.5'
 	compile group: 'com.google.guava', name: 'guava', version: '21.0'
