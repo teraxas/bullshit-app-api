@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/teraxas/bullshit-app-api.svg?branch=master)](https://travis-ci.org/teraxas/bullshit-app-api)
+
 # IT'S NOT CRAP. IT'S BULLSHIT! #
 
 This is a simple app with facts as questions, either true or bullshit. 
