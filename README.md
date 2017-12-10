@@ -23,10 +23,12 @@ Frontend app:
 * To run with PostgreSQL installed - setup environment variable JDBC_DATABASE_URL (Database URL in JDBC format). It's also a standard Heroku Java setup variable.
 * To run without PostgreSQL installed - run with "dev" Spring Boot profile - H2 embeded DB will be used as fallback: ```-Dspring.profiles.active=dev```
 
-## Pipelines
+## Deploy and Pipelines
 
 On commit to master, travic-ci runs.
 After successful run, Heroku pipeline deploys app automatically to staging.
+
+Set ENV_ALLOWED_ORIGIN variable to setup allowed origins.
 
 ## Docker
 

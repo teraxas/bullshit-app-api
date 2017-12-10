@@ -53,7 +53,7 @@ public class Application {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins(appConfig.getAllowedOrigin())
+						.allowedOrigins(appConfig.getAllowedOriginSplit())
 						.allowedMethods("PUT", "DELETE", "GET", "POST");
 			}
 		};

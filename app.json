@@ -7,5 +7,18 @@
 	"bullshit",
 	"spring-boot",
 	"java"
+  ],
+  "env": {
+	"ENV_ALLOWED_ORIGIN": {
+	  "description": "Allowed origins sepparated by '|'"
+	}
+  },
+  "addons": [
+	{
+	  "plan": "heroku-postgresql",
+	  "options": {
+		"version": "9.5"
+	  }
+	}
   ]
 }
