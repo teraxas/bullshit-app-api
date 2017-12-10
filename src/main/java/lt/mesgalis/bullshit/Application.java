@@ -54,7 +54,11 @@ public class Application {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedOrigins(appConfig.getAllowedOriginSplit())
-						.allowedMethods("PUT", "DELETE", "GET", "POST");
+						.allowedMethods("*")
+						.allowedHeaders("*")
+						.allowCredentials(true)
+						.exposedHeaders("*")
+						.exposedHeaders("*");
 			}
 		};
 	}
@@ -67,7 +71,7 @@ public class Application {
 				.build();
 	}
 
-    public static void printInfo() {
+    private static void printInfo() {
 		String databaseUrl = System.getenv("JDBC_DATABASE_URL");
 		log.info("JDBC_DATABASE_URL: " + databaseUrl);
 		log.info(databaseUrl == null ? "Running on in-memory DB" : "Running on PostgreSQL DB");
