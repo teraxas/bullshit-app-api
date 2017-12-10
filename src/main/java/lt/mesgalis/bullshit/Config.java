@@ -15,7 +15,7 @@ public class Config {
 	private String allowedOrigin;
 
 	public String[] getAllowedOriginSplit() {
-		return allowedOrigin.split("|");
+		return allowedOrigin.split("&&&");
 	}
 
 	public String getAllowedOrigin() {

@@ -10,7 +10,7 @@
   ],
   "env": {
 	"ENV_ALLOWED_ORIGIN": {
-	  "description": "Allowed origins sepparated by '|'"
+	  "description": "Allowed origins sepparated by '&&&'"
 	}
   },
   "addons": [
