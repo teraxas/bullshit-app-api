@@ -7,13 +7,15 @@ This is a simple app with facts as questions, either true or bullshit.
 I started it with a target of learning some new stuff about AngularJS, Spring Boot and Javaslang functional library.
 After some time rewrote whole thing to use Angular (2) and moved to gradle (previously used maven) - there is a git tag right before this switch.
 
-The app is hosted on Heroku: [bullshit-app-api](https://bullshit-app-api.herokuapp.com/)
+The app is hosted on Heroku: [bullshit-app-api](https://bullshit-app-api.herokuapp.com/swagger-ui.html)
 
 Frontend app:
 
 * [bullshit-app on heroku](https://bullshit-app.herokuapp.com/)
 * [bullshit-app on bitbucket](https://bitbucket.org/teraxas/bullshit-app-frontend-v2/)
  
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## How do I get set up? ###
 
 * Get JDK 1.8
@@ -23,7 +25,8 @@ Frontend app:
 
 ## Pipelines
 
-On commit to master, pipelines deploy app automatically to Heroku.
+On commit to master, travic-ci runs.
+After successful run, Heroku pipeline deploys app automatically to staging.
 
 ## Docker
 

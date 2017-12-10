@@ -1,0 +1,11 @@
+{
+  "name": "Bullshit App API",
+  "description": "Spring Boot API for Angular bullshit facts app",
+  "repository": "https://github.com/teraxas/bullshit-app-api",
+  "logo": "https://bullshit-app.herokuapp.com/favicon.png",
+  "keywords": [
+	"bullshit",
+	"spring-boot",
+	"java"
+  ]
+}
