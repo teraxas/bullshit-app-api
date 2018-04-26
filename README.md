@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/teraxas/bullshit-app-api.svg?branch=master)](https://travis-ci.org/teraxas/bullshit-app-api)
+[![Travis-CI Status](https://travis-ci.org/teraxas/bullshit-app-api.svg?branch=master)](https://travis-ci.org/teraxas/bullshit-app-api)
+[![AppVeyor status](https://ci.appveyor.com/api/projects/status/gldhfkq8yk4bpdpx/branch/master?svg=true)](https://ci.appveyor.com/project/teraxas/bullshit-app-api/branch/master)
 [![Heroku](http://heroku-badge.herokuapp.com/?app=bullshit-app-api&root=swagger-ui.html)](https://bullshit-app-api.herokuapp.com/swagger-ui.html)
 
 # IT'S NOT CRAP. IT'S BULLSHIT! #
