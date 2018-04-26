@@ -57,8 +57,8 @@ public class Application {
 						.allowedMethods("*")
 						.allowedHeaders("*")
 						.allowCredentials(true)
-						.exposedHeaders("*")
-						.exposedHeaders("*");
+//						.exposedHeaders("*")
+				;
 			}
 		};
 	}
